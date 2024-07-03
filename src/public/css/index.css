@@ -1,0 +1,55 @@
+.container {
+    padding: 20px;
+}
+
+.restaurant-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card {
+    width: calc(25% - 20px);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 15px;
+    text-align: center;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.detail-button,
+.favorite-button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.detail-button {
+    background-color: blue;
+    color: #fff;
+}
+
+.favorite-button {
+    background-color: white;
+    color: #fff;
+}
+
+.search-filter {
+    margin-bottom: 20px;
+}

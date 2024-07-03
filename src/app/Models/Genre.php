@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Genre extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name'];
+
+    public function restaurants()
+    {
+        return $this->hasMany(Restaurant::class);
+    }
 }
