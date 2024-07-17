@@ -39,22 +39,23 @@ Route::get('/thanks', [AuthController::class, 'thanks'])->name('thanks');
 Route::middleware('auth')->group(function () {
     // ログアウト
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    
 
-    // ユーザー情報取得
+
+    // マイページ
     // Route::get('/user', [UserController::class, 'index'])->name('users.index');
-    Route::get('/mypage', [UserController::class, 'mypage'])->name('mypage');
-    
+    Route::get('/mypage', [UserController::class, 'index'])->name('mypage');
+    Route::get('/mypage/favorite', [FavoriteController::class, 'index'])->name('mypage.favorites');
+    Route::get('/mypage/reservation', [ReservationController::class, 'index'])->name('mypage.reservations');
 
 
-    // お気に入り一覧取得・追加・削除
-    // Route::get('/favorites', [FavoriteController::class, 'index'])->name('favorites.index');
-    // Route::post('/favorites', [FavoriteController::class, 'store'])->name('favorites.store');
-    // Route::delete('/favorites/{id}', [FavoriteController::class, 'destroy'])->name('favorites.delete');
+    // お気に入り一覧追加・削除
+    Route::post('/favorite/add', [FavoriteController::class, 'add'])->name('favorite.add');
+    Route::delete('/favorite/delete/{id}', [FavoriteController::class, 'destroy'])->name('favorite.delete');
 
-    // 予約情報取得・追加・削除
-    Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
-    Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
-    Route::delete('/reservations', [ReservationController::class, 'destroy'])->name('reservations.delete');
+    // 予約情報追加・削除
+    Route::post('/reservation/create', [ReservationController::class, 'create'])->name('reservation.create');
+    Route::delete('/reservation/delete/{id}', [ReservationController::class, 'destroy'])->name('reservation.delete');
     Route::get('/done', [ReservationController::class, 'done'])->name('done');
+    Route::get('/reservation/edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
+    Route::put('/reservation/update/{id}', [ReservationController::class, 'update'])->name('reservation.update');
 });

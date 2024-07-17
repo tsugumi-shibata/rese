@@ -24,8 +24,18 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|string|email|max:191|unique:users',
+            'email' => 'required|string|email|max:191',
             'password' =>'required|string|min:8|max:191',
+        ];
+    }
+
+        public function messages()
+    {
+        return [
+            'email.required' => 'メールアドレスを入力してください',
+            'email.email' => 'メールアドレスはメール形式で入力してください',
+            'password.required' => 'パスワードを入力してください',
+            'password.min' => 'パスワードは8文字以上で入力してください',
         ];
     }
 }

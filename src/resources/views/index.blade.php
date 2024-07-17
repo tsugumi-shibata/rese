@@ -43,7 +43,13 @@
                 <p>#{{ $restaurant->area->name }} #{{ $restaurant->genre->name }}</p>
                 <div class="card-buttons">
                     <a href="{{ route('detail', ['restaurant_id' => $restaurant->id]) }}" class="detail-button">詳しくみる</a>
-                    <button class="favorite-button">❤️</button>
+                    @auth
+                    <form action="{{ route('favorite.add') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
+                        <button type="submit" class="favorite-button">❤️</button>
+                    </form>
+                    @endauth
                 </div>
             </div>
         </div>

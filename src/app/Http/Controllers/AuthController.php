@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use App\Models\Support\Facades\Auth;
 use App\Models\User;
-use App\Requests\RegisterRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,12 +16,14 @@ class AuthController extends Controller
         return view('index');
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
+        $validated = $request->validated();
+
         User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
         ]);
 
         return redirect()->route('thanks');
@@ -32,21 +34,16 @@ class AuthController extends Controller
         return view('thanks');
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            // フラッシュメッセージを設定
-            session()->flash('message', 'ログインしました');
-
-            return redirect()->route('mypage');
+            return redirect()->route('mypage')->with('message', 'ログインしました');
         }
 
         return back()->withErrors([
-            'email' => '認証に失敗しました',
+            'email' => 'メールアドレスまたはパスワードが正しくありません',
         ]);
     }
 
