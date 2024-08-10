@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Restaurant extends Model
 {
@@ -11,12 +13,12 @@ class Restaurant extends Model
 
     protected $fillable = [
         'name',
-        'address',
-        'tel',
         'area_id',
         'genre_id',
         'description',
         'image_url',
+        'store_representative_id',
+        'email',
     ];
 
     public function area()
@@ -37,5 +39,15 @@ class Restaurant extends Model
     public function favorites()
     {
         return $this->hasMany(Favorite::class);
+    }
+
+    public function isFavorite()
+    {
+        return $this->favorites()->where('user_id',Auth::id())->exists();
+    }
+
+    public function storeRepresentative()
+    {
+        return $this->belongsTo(User::class, 'store_representative_id');
     }
 }

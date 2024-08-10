@@ -1,0 +1,107 @@
+/* main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 100%;
+} */
+
+.auth-container {
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    background: white;
+    border-radius: 5px;
+    box-shadow:  4px 4px 5px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 450px;
+    overflow: hidden;
+    position: relative;
+    height: auto;
+}
+
+.auth-title {
+    font-size: 16px;
+    margin: 0;
+    padding: 15px;
+    background-color: #0223fbce;
+    color: white;
+    text-align: left;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.thanks-message {
+    font-size: 24px;
+    text-align: center;
+    margin-top: 70px;
+}
+
+.auth-form {
+    background: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.auth-form .form-group {
+    margin-bottom: 10px;
+}
+
+.auth-form .input-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.auth-form .input-icon i {
+    position: absolute;
+    left: 10px;
+}
+
+.auth-form .input-icon input {
+    width: 100%;
+    padding: 10px 10px 10px 30px;
+    font-size: 16px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.auth-button {
+    align-self: flex-end;
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #0223fbce;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 20px;
+    margin-bottom: 0px;
+    transition: box-shadow 0.1s ease;
+}
+
+.link-button{
+    align-self:center;
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #0223fbce;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    /* margin-top: 20px; */
+    margin-bottom: 30px;
+    transition: box-shadow 0.1s ease;
+}
+
+.auth-form button:hover {
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}

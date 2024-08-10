@@ -26,4 +26,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(Restaurant::class);
     }
+
+    public function scopeForRestaurant($query, $restaurantId)
+    {
+        return $query->where('restaurant_id', $restaurantId);
+    }
 }

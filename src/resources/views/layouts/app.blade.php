@@ -6,6 +6,8 @@
     <title>Rese</title>
     <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('css/common-auth.css') }}"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     @yield('css')
 </head>
 
@@ -30,16 +32,22 @@
             <ul>
                 <li><a href="{{ route('home') }}">Home</a></li>
                 @auth
-                <li><a href="{{ route('mypage') }}">My Page</a></li>
-                <li>
-                    <form action="{{ route('logout') }}" method="post">
-                        @csrf
-                        <button type="submit">Logout</button>
-                    </form>
-                </li>
+                    @if(Auth::user()->isAdmin())
+                        <li><a href="{{ route('admin.index') }}">Admin</a></li>
+                    @elseif(Auth::user()->isStoreRepresentative())
+                        <li><a href="{{ route('store.index') }}">Store</a></li>
+                    @else
+                        <li><a href="{{ route('mypage') }}">My Page</a></li>
+                    @endif
+                    <li>
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
                 @else
-                <li><a href="{{ route('register') }}">Registration</a></li>
-                <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('register') }}">Registration</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
                 @endauth
             </ul>
         </div>

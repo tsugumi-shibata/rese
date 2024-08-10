@@ -1,24 +1,29 @@
 @extends('layouts.app')
 
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/detail.css') }}">
+@endsection
+
 @section('content')
-    <h1>予約編集</h1>
+<div class="reservation-form-card">
+    <h2>予約編集</h2>
 
     <form action="{{ route('reservation.update', $reservation->id) }}" method="post">
         @csrf
         @method('PUT')
 
         <input type="hidden" name="restaurant_id" value="{{ $reservation->restaurant_id }}">
-        
+
         <div>
             <label for="reservation_date">予約日:</label>
             <input type="date" name="reservation_date" value="{{ $reservation->reservation_date }}">
         </div>
-        
+
         <div>
             <label for="reservation_time">予約時間:</label>
             <input type="time" name="reservation_time" value="{{ $reservation->reservation_time }}">
         </div>
-        
+
         <div>
             <label for="number_of_people">人数:</label>
             <select name="number_of_people">
@@ -32,4 +37,5 @@
 
         <button type="submit">更新する</button>
     </form>
+</div>
 @endsection

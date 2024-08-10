@@ -66,4 +66,10 @@ class ReservationController extends Controller
 
         return redirect()->route('mypage')->with('message', '予約を変更しました');
     }
+
+    public function show($id)
+    {
+        $reservation = Reservation::findOrFail($id);
+        return view('reservations.show',compact('reservation'));
+    }
 }

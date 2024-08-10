@@ -1,19 +1,120 @@
-.container {
+main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
+    box-sizing: border-box;
+}
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 auto;
+
+}
+
+.search-filter {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.search-filter form {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.search-filter select,
+.search-filter input[type="text"] {
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-right: 1px solid #ddd;
+    background-color: white;
+}
+
+/* .search-filter input[type="text"] {
+    flex: 1;
+} */
+
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.search-filter select {
+    appearance: none;
+    background-color: white;
+    position: relative;
+    padding-right: 30px;
+}
+
+.select-wrapper::after {
+    content: '\25BC';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 10px;
+    color: #ddd;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper input[type="text"] {
+    padding-left: 30px;
+    font-family: Arial,'Font Awesome 5 Free';
+    font-weight: 400;
+}
+
+.input-wrapper::before {
+    content: '\f002';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 16px;
+    color: #ddd;
+}
+
+.search-filter button {
+    padding: 10px 20px;
+    background-color: #0223fbce;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.search-filter button:hover {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .restaurant-list {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
 }
 
 .card {
-    width: calc(25% - 20px);
+    flex: 1 1 calc(25% - 20px);
+    max-width: calc(25% - 20px);
     border: 1px solid #ddd;
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
 }
 
 .card img {
@@ -41,15 +142,26 @@
 }
 
 .detail-button {
-    background-color: blue;
+    background-color: #0223fbce;
     color: #fff;
 }
 
 .favorite-button {
     background-color: white;
-    color: #fff;
+    color: #ddd;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    transition: color 0.3s ease;
 }
 
-.search-filter {
-    margin-bottom: 20px;
+.favorite-button.favorited {
+    color: red;
 }
+
+.heart {
+    font-size: 24px;
+    display: inline-block;
+    transition: color 0.3s ease;
+}
+

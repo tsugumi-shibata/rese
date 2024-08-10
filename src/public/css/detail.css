@@ -1,0 +1,104 @@
+/* レイアウト用のスタイリング */
+.restaurant-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.restaurant-details {
+    flex: 1;
+    max-width: 60%;
+    position: relative;
+}
+
+.back-button {
+    position: absolute;
+    top: 0;
+    left: -40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #f0f0f0;
+}
+
+.restaurant-details img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.restaurant-description {
+    margin-top: 10px;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.reservation-form-card {
+    flex: 1;
+    max-width: 35%;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #1432f5ce;
+    color: white;
+}
+
+.reservation-form-card h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 24px;
+    /* text-align: center; */
+}
+
+.reservation-form-card div {
+    margin-bottom: 15px;
+}
+
+.confirm {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #6578f7ce;
+}
+
+.confirm p {
+    margin: 5px 0;
+}
+
+.reserve-button {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0223fbce;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.reserve-button:hover {
+    background-color: #021fdb;
+}

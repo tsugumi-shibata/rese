@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +29,8 @@ Route::get('/menu', function () {
     return view('menu');
 })->name('menu');
 
-// Route::get('/restaurant/search', [RestaurantController::class, 'search'])->name('restaurant.search');
 
-// 登録・ログイン
+// 一般登録・ログイン
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
@@ -42,15 +43,13 @@ Route::middleware('auth')->group(function () {
 
 
     // マイページ
-    // Route::get('/user', [UserController::class, 'index'])->name('users.index');
     Route::get('/mypage', [UserController::class, 'index'])->name('mypage');
     Route::get('/mypage/favorite', [FavoriteController::class, 'index'])->name('mypage.favorites');
     Route::get('/mypage/reservation', [ReservationController::class, 'index'])->name('mypage.reservations');
 
 
     // お気に入り一覧追加・削除
-    Route::post('/favorite/add', [FavoriteController::class, 'add'])->name('favorite.add');
-    Route::delete('/favorite/delete/{id}', [FavoriteController::class, 'destroy'])->name('favorite.delete');
+    Route::post('/favorite/toggle',[FavoriteController::class,'toggle'])->name('favorite.toggle');
 
     // 予約情報追加・削除
     Route::post('/reservation/create', [ReservationController::class, 'create'])->name('reservation.create');
@@ -58,4 +57,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/done', [ReservationController::class, 'done'])->name('done');
     Route::get('/reservation/edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
     Route::put('/reservation/update/{id}', [ReservationController::class, 'update'])->name('reservation.update');
+});
+
+// 管理者用ルート
+Route::group(['middleware' => ['auth','role:admin']],function() {
+    Route::get('/admin',[AdminController::class,'index'])->name('admin.index');
+    Route::get('/admin/representative/create',[AdminController::class,'createRepresentative'])->name('admin.representative.create');
+    Route::post('/admin/representative/create',[AdminController::class,'storeRepresentative'])->name('admin.representative.store');
+    Route::get('/admin/representative/list',[AdminController::class,'listRepresentatives'])->name('admin.representative.list');
+    Route::delete('/admin/representative/{id}',[AdminController::class,'destroyRepresentative'])->name('admin.representative.destroy');
+});
+
+// 店舗代表者用ルート
+Route::group(['middleware' => ['auth','role:store_representative']],function() {
+    Route::get('/store',[StoreController::class,'index'])->name('store.index');
+
+    Route::get('/store/edit/{id}',[StoreController::class,'edit'])->name('store.edit');
+    Route::put('/store/{id}',[StoreController::class,'update'])->name('store.update');
+
+    Route::get('/store/reservations',[StoreController::class,'reservations'])->name('store.reservations');
+    Route::get('/store/reservations/{id}',[StoreController::class,'reservationDetail'])->name('store.reservation-detail');
 });

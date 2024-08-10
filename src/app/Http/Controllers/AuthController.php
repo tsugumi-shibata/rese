@@ -8,6 +8,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -20,11 +21,13 @@ class AuthController extends Controller
     {
         $validated = $request->validated();
 
-        User::create([
+        $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
         ]);
+
+        $user->assignRole('user');
 
         return redirect()->route('thanks');
     }
@@ -39,6 +42,16 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+
+            if ($user->hasRole('admin')) {
+                return redirect()->route('admin.index')->with('message','ログインしました');
+            }
+
+            if($user->hasRole('store_representative')) {
+                return redirect()->route('store.index')->with('message','ログインしました');
+            }
+
             return redirect()->route('mypage')->with('message', 'ログインしました');
         }
 
