@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             // AreaSeeder::class,
             // GenreSeeder::class,
             // RoleSeeder::class,
+            // RestaurantSeeder::class,
             // StoreRepresentativeSeeder::class,
             // RestaurantSeeder::class,
         ]);

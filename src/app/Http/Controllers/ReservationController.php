@@ -7,6 +7,8 @@ use App\Models\Reservation;
 use App\Http\Requests\ReservationRequest;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Mail\ReservationQRCodeMail;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
@@ -71,5 +73,12 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::findOrFail($id);
         return view('reservations.show',compact('reservation'));
+    }
+
+    public function confirmReservation($reservationId)
+    {
+        $reservation = Reservation::findOrFail($reservationId);
+
+        Mail::to($reservation->user->email)->send(new ReservationQRCodeMail($reservation));
     }
 }

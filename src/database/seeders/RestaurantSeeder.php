@@ -219,7 +219,7 @@ class RestaurantSeeder extends Seeder
             $storeRepId = $representativeIds[array_search($email,array_column($restaurants,'email'))] ?? null;
 
             Restaurant::updateOrCreate(
-                ['email' => $email],
+                ['name' => $restaurant['name']],
                 array_merge($restaurant, ['store_representative_id' => $storeRepId])
             );
         }

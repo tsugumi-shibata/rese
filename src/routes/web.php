@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -8,6 +12,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\VerificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,6 +24,14 @@ use App\Http\Controllers\StoreController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Auth::routes(['verify' => true]);
+
+// Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])->name('verification.verify');
+// Route::get('/email/verify',function () {
+//     return view('emails.verify');
+// })->name('verification.notice');
+
 
 // 飲食店一覧・詳細・検索
 Route::get('/', [RestaurantController::class, 'index'])->name('home');
@@ -38,6 +51,8 @@ Route::get('/thanks', [AuthController::class, 'thanks'])->name('thanks');
 
 // 認証必須
 Route::middleware('auth')->group(function () {
+
+    // Route::post('/email/resend', [VerificationController::class, 'resend'])->name('verification.resend');
     // ログアウト
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -77,4 +92,6 @@ Route::group(['middleware' => ['auth','role:store_representative']],function() {
 
     Route::get('/store/reservations',[StoreController::class,'reservations'])->name('store.reservations');
     Route::get('/store/reservations/{id}',[StoreController::class,'reservationDetail'])->name('store.reservation-detail');
+    Route::post('/store/send-notification/{userId}',[StoreController::class,'sendNotification'])->name('store.send-notification');
 });
+

@@ -1,3 +1,5 @@
+
+
 main {
     width: 100%;
     max-width: 1200px;
@@ -5,6 +7,7 @@ main {
     padding: 20px;
     box-sizing: border-box;
 }
+
 .container {
     width: 90%;
     max-width: 1200px;
@@ -38,9 +41,6 @@ main {
     background-color: white;
 }
 
-/* .search-filter input[type="text"] {
-    flex: 1;
-} */
 
 .select-wrapper {
     position: relative;
@@ -164,4 +164,53 @@ main {
     display: inline-block;
     transition: color 0.3s ease;
 }
+
+
+@media (max-width: 768px) {
+    .search-filter {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .search-filter form {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .search-filter select,
+    .search-filter input[type="text"],
+    .search-filter button {
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .restaurant-list {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .card-content {
+        padding: 10px;
+    }
+
+    .card-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .detail-button,
+    .favorite-button {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
 

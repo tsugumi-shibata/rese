@@ -1,4 +1,4 @@
-/* コンテナのスタイル */
+
 .dashboard-container {
     display: flex;
     justify-content: space-between;
@@ -54,7 +54,7 @@
     color: white;
 }
 
-/* お気に入り店舗のスタイル */
+
 .restaurant-list {
     display: flex;
     flex-wrap: wrap;
@@ -118,4 +118,37 @@
     font-size: 24px;
     display: inline-block;
     transition: color 0.3s ease;
+}
+
+
+@media screen and (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .restaurant-list {
+        flex-direction: column;
+    }
+
+    .card {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .reservations-section h2,
+    .favorites-section h2 {
+        font-size: 20px;
+    }
+
+    .card-content {
+        padding: 10px;
+    }
+
+    .edit-button,
+    .detail-button,
+    .favorite-button {
+        padding: 8px;
+        font-size: 14px;
+    }
 }

@@ -15,7 +15,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $reservations = Reservation::whereDate('reservation_date',today())->get();
+            foreach($reservations as $reservation) {
+                Mail::to($reservation->user->email)->send(new ReservationReminderMail($reservation));
+            }
+        })->dailyAt('09:00');
     }
 
     /**

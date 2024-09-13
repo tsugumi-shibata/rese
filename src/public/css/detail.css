@@ -1,4 +1,4 @@
-/* レイアウト用のスタイリング */
+
 .restaurant-container {
     display: flex;
     justify-content: space-between;
@@ -101,4 +101,26 @@
 
 .reserve-button:hover {
     background-color: #021fdb;
+}
+
+@media (max-width: 768px) {
+    .restaurant-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .restaurant-details {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .reservation-form-card {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .back-button {
+        left: 10px;
+    }
 }

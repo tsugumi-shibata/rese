@@ -44,6 +44,11 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
+            // if (!$user->hasVerifiedEmail()) {
+            //     Auth::logout();
+            //     return redirect()->route('verification.notice')->withErrors(['email'=> 'メールアドレスの確認が必要です']);
+            // }
+
             if ($user->hasRole('admin')) {
                 return redirect()->route('admin.index')->with('message','ログインしました');
             }

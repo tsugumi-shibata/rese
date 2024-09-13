@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\UserNotificationMail;
+use App\Models\User;
 use App\Models\Reservation;
 use App\Models\Restaurant;
 use App\Models\Area;
@@ -43,7 +47,7 @@ class StoreController extends Controller
 
         $restaurant->update($validated);
 
-        return redirect()->route('store.edit',$restaurant->id)->with('message',店舗情報が更新されました);
+        return redirect()->route('home',$restaurant->id)->with('message','店舗情報が更新されました');
     }
 
     public function reservations()
@@ -62,5 +66,18 @@ class StoreController extends Controller
         $reservation = Reservation::findOrFail($id);
 
         return view('store.reservation-detail',compact('reservation'));
+    }
+
+    public function sendNotification(Request $request,$userId)
+    {
+        $user = User::findOrFail($userId);
+        $notificationMessage = $request->input('message');
+        $reservation = Reservation::where('user_id',$userId)
+                                    ->where('restaurant_id',Auth::user()->restaurants->first()->id)
+                                    ->firstOrFail();
+
+        Mail::to($user->email)->send(new UserNotificationMail($user,$notificationMessage,$reservation));
+
+        return redirect()->back()->with('success','メールが送信されました');
     }
 }

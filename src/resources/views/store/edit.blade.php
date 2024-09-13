@@ -46,7 +46,7 @@
 
         <div>
             <label for="image_url">画像URL:</label>
-            <input type="url" id="image_url" name="image_url" value="{{ old('image_url', $restaurant->image_url) }}">
+            <input type="url" id="image_url" name="image_url" value="{{ old('image_url',$restaurant->image_url) }}">
         </div>
 
         <button type="submit">更新する</button>
