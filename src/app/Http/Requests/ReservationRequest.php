@@ -25,7 +25,7 @@ class ReservationRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'reservation_date' => 'required|date',
+            'reservation_date' => 'required|date|after:today',
             'reservation_time' =>'required',
             'number_of_people' => 'required|integer|min:1',
         ];
