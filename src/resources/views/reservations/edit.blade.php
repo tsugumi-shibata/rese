@@ -5,8 +5,18 @@
 @endsection
 
 @section('content')
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <div class="reservation-form-card">
-    <h2>予約編集</h2>
+    <h2>予約変更</h2>
 
     <form action="{{ route('reservation.update', $reservation->id) }}" method="post">
         @csrf
@@ -35,7 +45,13 @@
             </select>
         </div>
 
-        <button type="submit">更新する</button>
+        <button type="submit">予約を変更する</button>
+    </form>
+
+    <form action="{{ route('reservation.cancel', $reservation->id) }}"method="post">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger">予約をキャンセルする</button>
     </form>
 </div>
 @endsection

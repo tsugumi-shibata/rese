@@ -50,4 +50,9 @@ class Restaurant extends Model
     {
         return $this->belongsTo(User::class, 'store_representative_id');
     }
+
+    public function reviews()
+    {
+        return $this->hasManyThrough(Review::class,Reservation::class,'restaurant_id','reservation_id');
+    }
 }

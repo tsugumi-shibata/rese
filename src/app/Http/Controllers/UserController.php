@@ -12,8 +12,6 @@ class UserController extends Controller
 {
     public function index()
     {
-        // ユーザーのお気に入り店舗や予約状況の取得ロジック
-        // ...
         $favorites = Favorite::where('user_id', Auth::id())->with('restaurant')->get();
         $reservations = Reservation::where('user_id', Auth::id())->with('restaurant')->get();
 

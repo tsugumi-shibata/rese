@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Reservation extends Model
 {
@@ -27,8 +28,24 @@ class Reservation extends Model
         return $this->belongsTo(Restaurant::class);
     }
 
+    public function review()
+    {
+        return $this->hasOne(Review::class);
+    }
+
     public function scopeForRestaurant($query, $restaurantId)
     {
         return $query->where('restaurant_id', $restaurantId);
     }
+
+    public function isReviewed()
+    {
+        return $this->review()->exists();
+    }
+
+    public function isPast()
+    {
+        return $this->reservation_date < now()->toDateString();
+    }
+
 }

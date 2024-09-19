@@ -6,8 +6,6 @@
 
 @section('content')
 <div class="dashboard">
-    <!-- <h1>店舗代表者ダッシュボード</h1> -->
-    <!-- <h2>管理する店舗</h2> -->
     @if($restaurants->isEmpty())
         <p>管理する店舗がありません。</p>
     @else

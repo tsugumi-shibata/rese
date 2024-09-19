@@ -7,11 +7,11 @@
 
 @section('content')
 
-    @if (session('message'))
+    <!-- @if (session('message'))
     <div class="alert-success">
         {{session('message')}}
     </div>
-    @endif
+    @endif -->
 
     <div class="container">
         <div class="search-filter">
@@ -41,6 +41,12 @@
                 <button type="submit">search</button>
             </form>
         </div>
+
+    @if (session('message'))
+    <div class="alert-success">
+        {{session('message')}}
+    </div>
+    @endif
 
         <div class="restaurant-list">
             @foreach($restaurants as $restaurant)

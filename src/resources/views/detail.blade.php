@@ -7,13 +7,28 @@
 @section('content')
     <div class="restaurant-container">
         <div class="restaurant-details">
-            <a href="{{ url()->previous() }}" class="back-button"><</a>
-            <h1 class="restaurant-name">
-                {{ $restaurant->name }}</h1>
+            <div class="header">
+                <a href="{{ url()->previous() }}" class="back-button"><</a>
+            <h1 class="restaurant-name">{{ $restaurant->name }}</h1>
+            </div>
+
             <img src="{{ $restaurant->image_url }}" alt="{{ $restaurant->name }}">
             <p>#{{ $restaurant->area->name }} #{{ $restaurant->genre->name }}</p>
             <div class="restaurant-description">
                 <p>{{ $restaurant->description }}</p>
+
+                <h2>レビュー</h2>
+                @if($restaurant->reviews->isEmpty())
+                    <p>まだレビューがありません</p>
+                @else
+                    @foreach($restaurant->reviews as $review)
+                        <div class="review-card">
+                            <p>評価: ★{{ $review->rating }} </p>
+                            <p>コメント: {{ $review->comment }}</p>
+                            <p>{{ $review->created_at->format('Y年m月d日') }}</p>
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
 
@@ -61,6 +76,7 @@
                 <button type="submit" class="reserve-button">予約する</button>
             </form>
         </div>
+
 
         @endauth
     </div>

@@ -80,4 +80,11 @@ class StoreController extends Controller
 
         return redirect()->back()->with('success','メールが送信されました');
     }
+
+        public function show($id)
+    {
+        $restaurant = Restaurant::with('reviews')->findOrFail($id);
+
+        return view('restaurants.show', compact('restaurant'));
+    }
 }

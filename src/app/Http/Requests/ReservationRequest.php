@@ -24,11 +24,24 @@ class ReservationRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'reservation_date' => 'required|date|after:today',
-            'reservation_time' => ['required', 'date_format:H:i', new AfterNow()],
+        $rules = [
+            'reservation_date' => 'required|date',
+            'reservation_time' =>'required',
             'number_of_people' => 'required|integer|min:1',
         ];
+
+        // 予約変更
+        if ($this->isMethod('put') || $this->isMethod('patch')){
+            $reservation = $this->route('reservation');
+
+            if ($reservation) {
+                $rules['reservation_date'] .'|after_or_equal:' .$reservation->reservation_date;
+            }
+            $rules['reservation_time'] = 'nullable';
+        }
+
+        return $rules;
+
     }
 
     public function messages()
@@ -36,8 +49,8 @@ class ReservationRequest extends FormRequest
         return [
             'reservation_date.required' => '日付を選択してください',
             'reservation_date.after' => '今日より後の日付を選択してください',
+            'reservation_date.after_or_equal' => '予約日は変更前の日付以降を選択してください',
             'reservation_time.required' => '時間を選択してください',
-            'reservation_time.date_format' => '時間は「HH:MM」形式で入力してください',
             'number_of_people.required' => '人数を選択してください',
             'number_of_people.min' => '1人以上を選択してください',
         ];

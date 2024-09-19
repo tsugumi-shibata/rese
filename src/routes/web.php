@@ -60,7 +60,7 @@ Route::middleware('auth')->group(function () {
     // マイページ
     Route::get('/mypage', [UserController::class, 'index'])->name('mypage');
     Route::get('/mypage/favorite', [FavoriteController::class, 'index'])->name('mypage.favorites');
-    Route::get('/mypage/reservation', [ReservationController::class, 'index'])->name('mypage.reservations');
+    // Route::get('/mypage/reservation', [ReservationController::class, 'index'])->name('mypage.reservations');
 
 
     // お気に入り一覧追加・削除
@@ -68,10 +68,12 @@ Route::middleware('auth')->group(function () {
 
     // 予約情報追加・削除
     Route::post('/reservation/create', [ReservationController::class, 'create'])->name('reservation.create');
-    Route::delete('/reservation/delete/{id}', [ReservationController::class, 'destroy'])->name('reservation.delete');
+    Route::delete('/reservation/cancel/{id}', [ReservationController::class, 'cancel'])->name('reservation.cancel');
     Route::get('/done', [ReservationController::class, 'done'])->name('done');
     Route::get('/reservation/edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
     Route::put('/reservation/update/{id}', [ReservationController::class, 'update'])->name('reservation.update');
+    Route::post('/reservation/review/{id}',[ReservationController::class, 'storeReview'])->name('review.store');
+    Route::post('/reservation/close/{id}',[ReservationController::class,'destroy'])->name('reservation.destroy');
 });
 
 // 管理者用ルート
